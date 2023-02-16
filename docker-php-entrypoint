@@ -6,7 +6,8 @@ if [ "${1#-}" != "$1" ]; then
 	set -- php "$@"
 fi
 
-# If config/config.json does not (!) not (||) exist, remove config/INSTALLING
-test ! -e config/config.json || (rm config/INSTALLING && echo "INSTALLING removed")
+chown -R www-data:www-data config/docker
+# If config/config.json is not (!) not (||) empty, remove config/INSTALLING
+test ! -s config/config.json || (rm -f config/INSTALLING && echo "INSTALLING removed")
 
 exec "$@"

@@ -40,10 +40,16 @@ ARG AG_VERSION=4.11.1
 RUN sed -i 's#DocumentRoot\ .*#DocumentRoot\ /var/www/html/web#' /etc/apache2/sites-available/000-default.conf
 
 RUN curl -SL https://github.com/CatoTH/antragsgruen/releases/download/v${AG_VERSION}/antragsgruen-${AG_VERSION}.tar.bz2 \
-    | tar -xjC /var/www/html/ --strip-components=1 --no-same-owner \
-    && chown -R www-data:www-data .
+    | tar -xjC /var/www/html/ --strip-components=1 --no-same-owner
 
 COPY docker-php-entrypoint .
+
+RUN mkdir config/docker
+RUN touch config/docker/config.json
+RUN ln -sr config/docker/config.json config/config.json
+RUN chown -R www-data:www-data .
+
+VOLUME /var/www/html/config/docker
 
 ENTRYPOINT ["/var/www/html/docker-php-entrypoint"]
 CMD ["apache2-foreground"]
