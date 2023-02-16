@@ -44,10 +44,10 @@ RUN curl -SL https://github.com/CatoTH/antragsgruen/releases/download/v${AG_VERS
 
 COPY docker-php-entrypoint .
 
-RUN mkdir config/docker
-RUN touch config/docker/config.json
-RUN ln -sr config/docker/config.json config/config.json
-RUN chown -R www-data:www-data .
+RUN mkdir config/docker && \
+    touch config/docker/config.json && \
+    ln -sr config/docker/config.json config/config.json && \
+    chown -R www-data:www-data .
 
 VOLUME /var/www/html/config/docker
 
