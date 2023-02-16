@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+	set -- php "$@"
+fi
+
+# If config/config.json does not (!) not (||) exist, remove config/INSTALLING
+test ! -e config/config.json || (rm config/INSTALLING && echo "INSTALLING removed")
+
+exec "$@"
