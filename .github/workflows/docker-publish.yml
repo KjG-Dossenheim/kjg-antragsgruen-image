@@ -56,8 +56,9 @@ jobs:
       - name: Archive version
         id: vars
         run: |
-          echo "version=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
-          echo "tags=${GITHUB_REF#refs/*/} , ${${GITHUB_REF#refs/*/}%.*}" >> $GITHUB_OUTPUT
+          export EXACT_VERSION=${GITHUB_REF#refs/*/}
+          echo "version=${EXACT_VERSION}" >> $GITHUB_OUTPUT
+          echo "tags=${EXACT_VERSION} , ${EXACT_VERSION%.*}" >> $GITHUB_OUTPUT
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
