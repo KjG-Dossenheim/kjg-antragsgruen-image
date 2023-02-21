@@ -20,12 +20,14 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 # For curl https://github.com/docker-library/php/issues/323#issuecomment-256693115
 RUN apt update && apt install -y \
     libicu-dev \
-    zlib1g-dev libpng-dev \
+    zlib1g-dev libpng-dev libfreetype6-dev \
     libcurl3-dev \
     libxml2-dev \
     libonig-dev \
     libzip-dev \
     && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-configure gd --with-freetype
 
 # From https://github.com/CatoTH/antragsgruen#requirements
 RUN docker-php-ext-install -j$( nproc ) \
