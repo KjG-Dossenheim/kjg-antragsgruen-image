@@ -27,7 +27,7 @@ RUN apt update && apt install -y \
     libzip-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-configure gd --with-freetype
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # From https://github.com/CatoTH/antragsgruen#requirements
 RUN docker-php-ext-install -j$( nproc ) \
