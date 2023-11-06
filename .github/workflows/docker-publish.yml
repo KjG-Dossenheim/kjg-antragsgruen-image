@@ -8,6 +8,7 @@ name: Docker build and publish
 on:
   push:
     tags: [ '*.*.*' ]
+  workflow_dispatch:
 
 env:
   # Use docker.io for Docker Hub if empty
