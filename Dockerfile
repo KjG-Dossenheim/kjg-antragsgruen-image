@@ -37,7 +37,7 @@ RUN docker-php-ext-install -j$( nproc ) \
 RUN sed -i 's/expose_php\ =\ On/expose_php = Off/' "$PHP_INI_DIR/php.ini"
 
 ## Antragsgrün
-ARG AG_VERSION=4.11.1
+ARG AG_VERSION=4.13
 
 RUN sed -i 's#DocumentRoot\ .*#DocumentRoot\ /var/www/html/web#' /etc/apache2/sites-available/000-default.conf
 
